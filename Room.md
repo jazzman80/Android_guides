@@ -28,3 +28,57 @@ data class User(
 ...
 )
 ```
+## DAO
+Создаётся Data Access Object как интерфейс размеченный аннотациями следующего вида:
+```
+@Dao
+interface UserDao {
+
+    @Query("SELECT * FROM user")
+    fun selectAll(): List<User>
+
+    @Insert
+    fun insert(user: User)
+
+    @Delete
+    fun delete(user: User)
+
+    @Update
+    fun update(user: User)
+}
+```
+## Создание базы данных
+БД создаётся как абстрактный класс вида:
+```
+@Database(entities = [User::class], version = 1)
+abstract class AppDatabase: RoomDatabase() {
+    abstract fun userDao():UserDao
+}
+```
+## Подключение к приложению (при отсутствии DI)
+Создаём класс Application и инициализируем экземпляр базы данных
+```
+class App : Application() {
+    lateinit var db: AppDatabase
+
+    override fun onCreate() {
+        super.onCreate()
+
+        db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java,
+            "db"
+        ).build()
+    }
+}
+```
+Добавляем в манифест Application
+```
+<application
+    android:name=".App"
+    ...
+```
+## Доступ к DAO
+```
+val userDao: UserDao = (application as App).db.userDao()
+```
