@@ -72,6 +72,13 @@ class App : Application() {
     }
 }
 ```
+Во время разработки приложения инициализировать БД в памяти, чтобы избежать миграций
+```
+db = Room.inMemoryDatabaseBuilder(
+    applicationContext,
+    AppDatabase::class.java
+).build()
+```
 Добавляем в манифест Application
 ```
 <application
