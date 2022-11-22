@@ -6,6 +6,8 @@ buildFeatures {
     viewBinding = true
 }
 ```
+## Layout
+Создаём layout вида "activity_main.xml", это необходимо для создания viewBinding классов
 ## Создание Activity
 Создаём класс и наследуем его от AppComPatActivity, реализуем OnCreate и binding
 ```
@@ -37,5 +39,3 @@ class MainActivity:AppCompatActivity() {
 ```
 <activity android:name=".MainActivity"/>
 ```
-## Layout
-Создаём layout вида "activity_main.xml"
