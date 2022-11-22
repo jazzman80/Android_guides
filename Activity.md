@@ -38,4 +38,4 @@ class MainActivity:AppCompatActivity() {
 <activity android:name=".MainActivity"/>
 ```
 ## Layout
-Создаём layout вида "activity-main.xml"
+Создаём layout вида "activity_main.xml"
