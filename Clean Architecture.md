@@ -41,5 +41,9 @@ class App : Application() { ... }
     ...
 />
 ```
-## Fragment и Activity
+## Fragment, Activity и ViewModel
 Fragment и Activity необходимо помечать аннотацией @AndroidEntryPoint
+ViewModel - @HiltViewModel
+
+## Внедрение зависимостей
+Конструкторы всех классов, учавствующих в зависисмостях, отметить как @Inject constructor(), даже если конструктор пустой!
