@@ -37,7 +37,9 @@ class App : Application() { ... }
 Зарегистрировать в manifest
 ```
 <application
-    android:name="App"
+    android:name=".App"
     ...
 />
 ```
+## Fragment и Activity
+Fragment и Activity необходимо помечать аннотацией @AndroidEntryPoint
