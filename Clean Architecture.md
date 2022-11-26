@@ -42,7 +42,7 @@ class App : Application() { ... }
 />
 ```
 ## Fragment, Activity и ViewModel
-Fragment и Activity необходимо помечать аннотацией @AndroidEntryPoint
+Fragment и Activity необходимо помечать аннотацией @AndroidEntryPoint.
 ViewModel - @HiltViewModel
 
 ## Внедрение зависимостей
