@@ -32,5 +32,12 @@ kapt {
 Для реализации Hilt необходим класс Application с аннотацией
 ```
 @HiltAndroidApp
-class ExampleApplication : Application() { ... }
+class App : Application() { ... }
+```
+Зарегистрировать в manifest
+```
+<application
+    android:name="App"
+    ...
+/>
 ```
