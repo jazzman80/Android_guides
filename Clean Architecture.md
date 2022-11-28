@@ -47,3 +47,14 @@ ViewModel - @HiltViewModel
 
 ## Внедрение зависимостей
 Конструкторы всех классов, учавствующих в зависисмостях, отметить как @Inject constructor(), даже если конструктор пустой!
+## Entity
+Сущности описываются как интерфейсы
+```
+interface Camera {
+    val id: Int
+    val name: String
+    val roverId: Int
+    val fullName: String
+}
+```
+Далее в коде эти интерфейсф реализуются, как объекты
