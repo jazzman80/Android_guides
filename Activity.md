@@ -11,15 +11,14 @@ buildFeatures {
 ## Создание Activity
 Создаём класс и наследуем его от AppComPatActivity, реализуем OnCreate и binding
 ```
-class MainActivity:AppCompatActivity() {
+class MainActivity: AppCompatActivity() {
 
-    private var _binding: ActivityMainBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        _binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
 }
