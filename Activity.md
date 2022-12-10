@@ -1,4 +1,16 @@
 # Activity
+## Compose
+Для работы с Compose
+```
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            Text("Hello world!")
+        }
+    }
+}
+```
 ## Подключение ViewBinding
 В Gradle уровня Module прописываем ViewBinding
 ```
