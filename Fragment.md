@@ -28,5 +28,10 @@ class MainFragment : Fragment() {
         _binding = FragmentMainBinding.inflate(inflater)
         return binding.root
     }
+    
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
 }
 ```
