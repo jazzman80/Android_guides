@@ -11,3 +11,22 @@ buildFeatures {
 }
 ```
 ## View Adapter
+Простейший адаптер
+```
+class MyAdapter(
+    private val values: List<String>
+) : RecyclerView.Adapter<MyViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+        val binding = MyItemBinding.inflate(LayoutInflater.from(parent.context))
+        return MyViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        holder.binding.textView.text = values[position]
+    }
+
+    override fun getItemCount(): Int = values.size
+}
+
+class MyViewHolder(val binding: MyItemBinding) : RecyclerView.ViewHolder(binding.root)
+```
