@@ -33,5 +33,5 @@ class MyViewHolder(val binding: MyItemBinding) : RecyclerView.ViewHolder(binding
 ## Подключение во фрагменте
 В OnViewCreated
 ```
-binding.photoList.adapter = MyAdapter(some_data)
+binding.myRecyclerView.adapter = MyAdapter(some_data)
 ```
