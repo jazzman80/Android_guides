@@ -56,6 +56,35 @@ abstract class AppDatabase: RoomDatabase() {
     abstract fun userDao():UserDao
 }
 ```
+## Подключение с Hilt
+В репозиторй инжектируем DAO
+```
+class Repository @Inject constructor(
+    private val photoDao: PhotoDao
+)
+```
+## Database Module
+Создаём Database Module для сборки рабочей БД
+```
+@InstallIn(SingletonComponent::class)
+@Module
+class DatabaseModule {
+    @Provides
+    fun providePhotoDao(appDatabase: AppDatabase): PhotoDao {
+        return appDatabase.photoDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideAppDatabase(@ApplicationContext appContext: Context): AppDatabase {
+        return Room.databaseBuilder(
+            appContext,
+            AppDatabase::class.java,
+            "Photo Database"
+        ).build()
+    }
+}
+```
 ## Подключение к приложению (при отсутствии DI)
 Создаём класс Application и инициализируем экземпляр базы данных
 ```
