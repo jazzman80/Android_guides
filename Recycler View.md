@@ -42,6 +42,14 @@ class PhotoAdapter(
     class MyViewHolder(val binding: ItemPhotoBinding) : RecyclerView.ViewHolder(binding.root)
 }
 ```
+Передачу новых данных делать через setData
+```
+        viewModel.photoList.observe(viewLifecycleOwner
+        ) {
+            photoList = it
+            adapter.setData(photoList)
+        }
+```
 ## View Adapter
 Простейший адаптер
 ```
