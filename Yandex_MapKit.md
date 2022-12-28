@@ -49,7 +49,8 @@
     }
 ```
 ## Навигация
-Камера следит за пользователем и плавно прилетает к нему
+Камера следит за пользователем и плавно прилетает к нему   
+В onCreate добавляем
 ```
         mapView = binding.mapView
         mapView.map.isRotateGesturesEnabled = false
@@ -106,4 +107,13 @@
         super.onDestroy()
         _binding = null
     }
+```
+## Слой поиска
+```
+        // Поиск
+        SearchFactory.initialize(requireContext())
+        searchLayer = SearchFactory.getInstance().createSearchLayer(mapView.mapWindow)
+        searchLayer.isVisible = true
+        searchLayer.enableMapMoveOnSearchResponse(false)
+        searchLayer.submitQuery("Достопримечательности", SearchOptions())
 ```
