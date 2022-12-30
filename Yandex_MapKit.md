@@ -5,6 +5,11 @@
     // Yandex MapKit
     implementation 'com.yandex.android:maps.mobile:4.2.2-full'
 ```
+## Application
+В OnCreate Application записываем
+```
+MapKitFactory.setApiKey("26e6745e-c64f-4244-9d3e-b83717c9f4bf")
+```
 ## Permissions
 Для работы необходимы разрешения интернета и определения местоположения    
 В манифест добавляем
