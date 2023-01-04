@@ -15,3 +15,4 @@ FirebaseCrashlytics.getInstance().log("My Log")
 ```
 FirebaseCrashlytics.getInstance().recordException(e)
 ```
+## Notifications
