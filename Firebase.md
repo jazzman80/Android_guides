@@ -15,4 +15,44 @@ FirebaseCrashlytics.getInstance().log("My Log")
 ```
 FirebaseCrashlytics.getInstance().recordException(e)
 ```
-## Notifications
+## Notification Messages
+Отправляются автоматически, если приложение не запущено или не в фокусе     
+В Gradle уровня Module добавляем
+```
+implementation 'com.google.firebase:firebase-messaging-ktx'
+```
+В манифест, внутри тега application добавляем
+```
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_notification"/>
+```
+## Data Messages
+Пишем дополнительный класс сервиса уведомлений
+```
+import com.google.firebase.messaging.FirebaseMessagingService
+import com.google.firebase.messaging.RemoteMessage
+
+class FcmService: FirebaseMessagingService() {
+    override fun onMessageReceived(message: RemoteMessage) {
+        // Пишем Notification, который может принимать данные из message
+
+        super.onMessageReceived(message)
+    }
+
+    override fun onNewToken(token: String) {
+        // Действия при обновлении fcm токена - обычно сохранение его на сервер
+
+        super.onNewToken(token)
+    }
+}
+```
+В манифест, внутри тега application добавляем
+```
+        <service android:name=".FcmService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+```
