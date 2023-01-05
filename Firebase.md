@@ -36,6 +36,14 @@ import com.google.firebase.messaging.RemoteMessage
 class FcmService: FirebaseMessagingService() {
     override fun onMessageReceived(message: RemoteMessage) {
         // Пишем Notification, который может принимать данные из message
+        val notification = NotificationCompat.Builder(this, App.NOTIFICATION_CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_notification)
+            .setContentTitle(message.data["title"])
+            .setContentText(message.data["text"])
+            .setAutoCancel(true)
+            .build()
+
+        NotificationManagerCompat.from(this).notify(Random.nextInt(), notification)
 
         super.onMessageReceived(message)
     }
