@@ -4,6 +4,7 @@
 В Gradle уровня Module необходимо имплементировать следующие библиотеки
 
 ```
+// MVVM
 implementation 'androidx.fragment:fragment-ktx:1.5.4'
 implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
 implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
