@@ -57,3 +57,19 @@ binding.textView.animate()
         }
 ```
 Список интерполяторов https://thoughtbot.com/blog/android-interpolators-a-visual-guide
+## Value Animator
+Позволяет анимировать любые значения    
+На примере появления текста
+```
+        val newText = "Animated"
+
+        val animator = ValueAnimator.ofFloat(0f,1f)
+        animator.addUpdateListener { valueAnimator ->
+            binding.textView.text = newText.subSequence(
+                startIndex = 0,
+                endIndex = (valueAnimator.animatedFraction * newText.length).toInt(),
+            )
+        }
+        animator.setDuration(1000L).start()
+```
+
