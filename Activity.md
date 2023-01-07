@@ -23,6 +23,9 @@ buildFeatures {
 ## Создание Activity
 Создаём класс и наследуем его от AppComPatActivity, реализуем OnCreate и binding
 ```
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+
 class MainActivity: AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
