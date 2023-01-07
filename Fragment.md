@@ -15,6 +15,12 @@ implementation 'androidx.fragment:fragment-ktx:1.5.4'
 ## Класс Fragment
 Создаём класс фрагмента и наследуем его от Fragment
 ```
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+
 class MainFragment : Fragment() {
 
     private var _binding: FragmentMainBinding? = null
