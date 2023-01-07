@@ -72,4 +72,44 @@ binding.textView.animate()
         }
         animator.setDuration(1000L).start()
 ```
+## XML Animation
+Анимация выносится в xml файл в папке res/animator
+```
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:ordering="sequentially">
+    <set android:ordering="together">
+        <objectAnimator
+            android:duration="200"
+            android:propertyName="scaleX"
+            android:valueTo="2.0F"
+            android:valueType="floatType" />
+        <objectAnimator
+            android:duration="200"
+            android:propertyName="scaleY"
+            android:valueTo="2.0F"
+            android:valueType="floatType" />
+    </set>
+    <set android:ordering="together">
+        <objectAnimator
+            android:duration="500"
+            android:propertyName="scaleX"
+            android:valueTo="1.0F"
+            android:valueType="floatType" />
+        <objectAnimator
+            android:duration="500"
+            android:propertyName="scaleY"
+            android:valueTo="1.0F"
+            android:valueType="floatType" />
+    </set>
+```
+Во фрагменте прописываем апуск анимации
+```
+        val animator = AnimatorInflater.loadAnimator(
+            requireContext(),
+            R.animator.animation_scale
+        ) as AnimatorSet
 
+        animator.setTarget(binding.button)
+        animator.interpolator = BounceInterpolator()
+        animator.start()
+```
