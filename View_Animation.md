@@ -40,6 +40,44 @@
         animator.interpolator = BounceInterpolator()
         animator.start()
 ```
+## Motion Layout
+Меняем constraint layout на motion layout   
+В папке XML генерируется специальный файл сцены, описывающий изменения лэйаута для анимации вида
+```
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ConstraintSet android:id="@+id/start">
+
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+
+        <Constraint
+            android:id="@+id/text_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.4"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:scaleX="2"
+            android:scaleY="2" />
+    </ConstraintSet>
+
+    <Transition
+        app:constraintSetEnd="@id/end"
+        app:constraintSetStart="@+id/start"
+        app:duration="1000" />
+</MotionScene>
+```
+Анимацию запускаем из кода
+```
+binding.motionLayout.transitionToEnd()
+```
 ## animate()
 Любая view имеет билдер animate()
 ```
