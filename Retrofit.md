@@ -64,14 +64,3 @@ interface GetUser {
         }
     }
 ```
-
-@JsonClass(generateAdapter = true)
-data class Name(
-    @Json(name = "first") val firstName: String,
-    @Json(name = "last") val lastName: String
-)
-
-@JsonClass(generateAdapter = true)
-data class Picture(
-    @Json(name = "large") val imageUrl: String
-)
