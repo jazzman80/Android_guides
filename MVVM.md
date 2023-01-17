@@ -13,7 +13,11 @@ implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
 ### Создание ViewModel
 ViewModel реализуется как класс, унаследованный от ViewModel
 ```
-class MainViewModel : ViewModel() {}
+import androidx.lifecycle.ViewModel
+
+class MainViewModel : ViewModel() {
+    
+}
 ```
 
 ### Реализация ViewModel в Activity или Fragment
