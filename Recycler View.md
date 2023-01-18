@@ -54,6 +54,10 @@ class PhotoAdapter(
 ## View Adapter
 Простейший адаптер
 ```
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+
 class MyAdapter(
     private val values: List<String>
 ) : RecyclerView.Adapter<MyViewHolder>() {
