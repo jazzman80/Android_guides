@@ -2,6 +2,7 @@
 ## Gradle
 В Gradle уровня module добавляем
 ```
+// RecyclerView
 implementation 'androidx.recyclerview:recyclerview:1.2.1'
 ```
 для работы полезен view binding
