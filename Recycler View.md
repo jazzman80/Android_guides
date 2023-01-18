@@ -76,6 +76,25 @@ class MyAdapter(
     class ViewHolder(val binding: ItemBinding) : RecyclerView.ViewHolder(binding.root)
 }
 ```
+## DiffUtil Callback
+Для автоматического вычисления изменений пишем класс DiffUtilCallback
+```
+import androidx.recyclerview.widget.DiffUtil
+
+class ElementDuffUtilCallback(
+    private val oldList: List<Worker>,
+    private val newList: List<Worker>
+) : DiffUtil.Callback(){
+    override fun getOldListSize(): Int = oldList.size
+    override fun getNewListSize(): Int = newList.size
+
+    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
+        oldList[oldItemPosition].name == newList[newItemPosition].name
+
+    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
+        oldList[oldItemPosition].position == newList[newItemPosition].position
+}
+```
 ## Подключение во фрагменте
 В OnViewCreated
 ```
