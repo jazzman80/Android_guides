@@ -57,23 +57,24 @@ class PhotoAdapter(
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.sandbox.databinding.ItemBinding
 
 class MyAdapter(
     private val values: List<String>
-) : RecyclerView.Adapter<MyViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val binding = MyItemBinding.inflate(LayoutInflater.from(parent.context))
-        return MyViewHolder(binding)
+) : RecyclerView.Adapter<MyAdapter.ViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val binding = ItemBinding.inflate(LayoutInflater.from(parent.context))
+        return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.textView.text = values[position]
     }
 
     override fun getItemCount(): Int = values.size
-}
 
-class MyViewHolder(val binding: MyItemBinding) : RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(val binding: ItemBinding) : RecyclerView.ViewHolder(binding.root)
+}
 ```
 ## Подключение во фрагменте
 В OnViewCreated
