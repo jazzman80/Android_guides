@@ -11,45 +11,82 @@ buildFeatures {
     viewBinding = true
 }
 ```
-## Адаптер с автообновлением
+## Адаптер с автообновлением через DiffUtil
 ```
-class PhotoAdapter(
-    private val context: Context,
-    values: List<Photo>
-) : RecyclerView.Adapter<PhotoAdapter.MyViewHolder>() {
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
 
-    private var values = values.toMutableList()
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun setData(newValues: List<Photo>){
-        values = newValues.toMutableList()
-        notifyDataSetChanged()
+// TODO Рефакторим название класса
+class MyAdapter(
+    // TODO Устанавливаем правильный тип данных списка Ctrl + Shift + R - автозамена
+    private var values: List<MyEntity>
+) : RecyclerView.Adapter<MyAdapter.ViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        // TODO Прописываем и импортируем биндинг элемента списка
+        val binding = MyItemBinding.inflate(LayoutInflater.from(parent.context))
+        return ViewHolder(binding)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val binding = ItemPhotoBinding.inflate(LayoutInflater.from(parent.context))
-        return MyViewHolder(binding)
-    }
-
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        Glide.with(context)
-            .load(values[position].path.toUri())
-            .placeholder(R.drawable.ic_outline_camera_24)
-            .into(holder.binding.photoView)
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        // TODO Визуализируем данные на экране
+        holder.binding.myView.text = values[position].text
     }
 
     override fun getItemCount(): Int = values.size
 
-    class MyViewHolder(val binding: ItemPhotoBinding) : RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(val binding: ItemBinding) : RecyclerView.ViewHolder(binding.root)
+
+    class DuffUtilCallback(
+        // TODO Устанавливаем правильный тип данных списков
+        private val oldList: List<MyEntity>,
+        private val newList: List<MyEntity>
+    ) : DiffUtil.Callback(){
+        override fun getOldListSize(): Int = oldList.size
+        override fun getNewListSize(): Int = newList.size
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
+            // TODO Прописываем правило равенства элементов списка
+            oldList[oldItemPosition].name == newList[newItemPosition].name
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
+            // TODO Прописываем правило равенства контента элементов списка
+            oldList[oldItemPosition].position == newList[newItemPosition].position
+    }
+
+    // TODO Устанавливаем правильный тип данных списка
+    fun update(newElements: List<MyEntity>) {
+
+        val result = DiffUtil.calculateDiff(
+            DuffUtilCallback(
+                oldList = values,
+                newList = newElements
+            )
+        )
+
+        values = newElements
+        result.dispatchUpdatesTo(this)
+    }
+```
+В переменных фрагмента
+```
+// TODO Прописать и импортировать правильный тип адаптера
+private var adapter: MyAdapter? = null
+```
+В onViewCreated фрагмента
+```
+// TODO Прописать правильный тип адаптера и ID RecyclerView
+adapter = MyAdapter(emptyList())
+binding.recyclerView.adapter = adapter
+```
+Передачу новых данных делать через update
+```
+viewModel.elements.observe(
+    viewLifecycleOwner
+) { newElements ->
+    adapter!!.update(newElements)
 }
-```
-Передачу новых данных делать через setData
-```
-        viewModel.photoList.observe(viewLifecycleOwner
-        ) {
-            photoList = it
-            adapter.setData(photoList)
-        }
 ```
 ## View Adapter
 Простейший адаптер
