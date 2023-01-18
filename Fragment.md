@@ -8,6 +8,7 @@ buildFeatures {
 ```
 И зависимости для работы binding
 ```
+// Fragment
 implementation 'androidx.fragment:fragment-ktx:1.5.4'
 ```
 ## Layout
