@@ -39,22 +39,33 @@ data class Picture(
 ## Сервис
 Для работы необходимо создать сервис вида
 ```
-private const val BASE_URL = "https://randomuser.me"
+import retrofit2.Call
+import retrofit2.Retrofit
+import retrofit2.create
+import retrofit2.http.GET
+import retrofit2.http.Query
 
-object RetrofitService {
-    private val retrofit =
-        Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(MoshiConverterFactory.create())
-            .build()
+interface RetrofitService {
+    @GET("api/character")
+    fun loadList(@Query("page") page: Int): Call<Response>
 
-    val getUser: GetUser = retrofit.create(
-        GetUser::class.java
-    )
+    companion object{
+        const val pageSize = 20
+
+        val retrofit by lazy {
+            Retrofit
+                .Builder()
+                .baseUrl("https://rickandmortyapi.com")
+                .build()
+                .create<RetrofitService>()
+        }
+    }
+
 }
 
-interface GetUser {
-    @GET("api")
-    suspend fun getUser(): Response
-}
+class Response(
+    val results: List<Character>
+)
 ```
 ## Запрос из ViewModel
 ```
