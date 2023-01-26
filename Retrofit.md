@@ -14,6 +14,35 @@
     implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.14.0")
 ```
+## Наиболее простой вариант - с gson
+Не требует аннотаций к моделям данных
+```
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
+import retrofit2.http.GET
+import retrofit2.http.Query
+import ru.iflex.mobile.module23.entity.Response
+
+
+interface RetrofitService {
+    @GET("api/character")
+    suspend fun loadList(@Query("page") page: Int): Response
+
+    companion object {
+
+        val retrofit by lazy {
+            Retrofit
+                .Builder()
+                .baseUrl("https://rickandmortyapi.com")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create<RetrofitService>()
+        }
+    }
+
+}
+```
 ## Entity
 Пример создания вложенной сущности
 ```
