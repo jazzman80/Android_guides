@@ -54,3 +54,8 @@ class MainActivity: AppCompatActivity() {
 ```
 <activity android:name=".MainActivity"/>
 ```
+## Activity с Databinding
+```
+        val binding : ActivityMainBinding =
+            DataBindingUtil.setContentView(this, R.layout.activity_main)
+```
