@@ -42,3 +42,9 @@ class MainFragment : Fragment() {
     }
 }
 ```
+
+## Фрагмент с Databinding
+```
+        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_a, container, false)
+        return binding.root
+```
